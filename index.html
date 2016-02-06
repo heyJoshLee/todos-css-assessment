@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>Todos</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="javascripts/todos.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+  </head>
+  <body>
+    <main>
+      <section id="menu">
+        <h1>All Todos</h1>
+        <ul class="all-todos">
+          <li><a href="#">02/16</a></li>
+          <li><a href="#">02/16</a></li>
+          <li><a href="#">02/16</a></li>
+          <li><a href="#">02/16</a></li>
+          <li><a href="#">02/16</a></li>
+          <li><a href="#">02/16</a></li>
+          <li><a href="#">02/16</a></li>
+        </ul>
+        <h2>Completed</h2>
+        <ul class="completed-todos">
+          <li class="complete">02/15</li>
+          <li class="complete">02/15</li>
+          <li class="complete">02/15</li>
+          <li class="complete">02/15</li>
+          <li class="complete">02/15</li>
+          <li class="complete">02/15</li>
+        </ul>
+      </section>
+
+      <section id="todo-container">
+          <a id="menu-icon" href="#"></a>
+          <article class="current-todo">
+            <h2 id="todo-title">02/16</h2>
+            <a id="add-button" href="#">Add new Todo</a>
+            <ul>
+              <li>
+                <label>
+                <input type="checkbox">
+                  Item
+                </label>
+              </li>
+              <li>
+                <label>
+                <input type="checkbox">
+                Item 1
+                </label>
+              </li>
+              <li>
+                <label>
+                <input type="checkbox">
+                Item 1
+                </label>
+              </li>
+              <li>
+                <label>
+                <input type="checkbox">
+                Item 1
+                </label>
+              </li>
+              <li>
+                <label>
+                <input type="checkbox">
+                Item 1
+                </label>
+              </li>
+              <li>
+                <label>
+                <input type="checkbox">
+                Item 1
+                </label>
+              </li>
+              <li>
+                <label>
+                <input type="checkbox">
+                Item 1
+                </label>
+              </li>
+              <li>
+                <label>
+                <input type="checkbox">
+                Item 1
+                </label>
+              </li>
+              <li>
+                <label>
+                <input type="checkbox">
+                Item 1
+                </label>
+              </li>
+            </ul>
+          </article>
+          <a class="open-button" href="#">Open Modal</a>
+      </section>
+      <div class="modal">
+        <h1>Todo: 06/16</h1>
+        <p>
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+        </p>
+        <div class="close-button">X</div>
+      </div>
+      <div class="modal-bg"></div>
+    </main>
+
+  </body>
+</html>

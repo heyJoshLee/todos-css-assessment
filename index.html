@@ -11,23 +11,23 @@
     <main>
       <section id="menu">
         <h1>All Todos</h1>
-        <ul class="all-todos">
+        <ul id="all-todos">
           <li><a href="#">02/16</a></li>
-          <li><a href="#">02/16</a></li>
-          <li><a href="#">02/16</a></li>
-          <li><a href="#">02/16</a></li>
-          <li><a href="#">02/16</a></li>
-          <li><a href="#">02/16</a></li>
-          <li><a href="#">02/16</a></li>
+          <li><a href="#">03/16</a></li>
+          <li><a href="#">04/16</a></li>
+          <li><a href="#">05/16</a></li>
+          <li><a href="#">06/16</a></li>
+          <li><a href="#">07/16</a></li>
+          <li><a href="#">08/16</a></li>
         </ul>
         <h2>Completed</h2>
-        <ul class="completed-todos">
-          <li class="complete">02/15</li>
-          <li class="complete">02/15</li>
-          <li class="complete">02/15</li>
-          <li class="complete">02/15</li>
-          <li class="complete">02/15</li>
-          <li class="complete">02/15</li>
+        <ul id="completed-todos">
+          <li>02/15</li>
+          <li>03/15</li>
+          <li>04/15</li>
+          <li>05/15</li>
+          <li>06/15</li>
+          <li>07/15</li>
         </ul>
       </section>
 
@@ -37,70 +37,89 @@
             <h2 id="todo-title">02/16</h2>
             <a id="add-button" href="#">Add new Todo</a>
             <ul>
+
+              <!-- note 1: Tried making the checkboxes without using ids by wrapping
+              the whole thing in a label tag, but I found this way easier -->
+              <!-- I read that in order to properly style the checkboxes I would need
+              to create more text boxes and have them hidden. Not styling them seemed like the
+              way to go here -->
               <li>
-                <label>
-                <input type="checkbox">
-                  Item
+                <input type="checkbox" id="check-1">
+                <label for="check-1">
+                  Item 1
                 </label>
               </li>
+
               <li>
-                <label>
-                <input type="checkbox">
-                Item 1
+                <input type="checkbox" id="check-2">
+                <label for="check-2">
+                  Item 2
                 </label>
               </li>
+
               <li>
-                <label>
-                <input type="checkbox">
-                Item 1
+                <input type="checkbox" id="check-3">
+                <label for="check-3">
+                  Item 3
                 </label>
               </li>
+
               <li>
-                <label>
-                <input type="checkbox">
-                Item 1
+                <input type="checkbox" id="check-4">
+                <label for="check-4">
+                  Item 4
                 </label>
               </li>
+
               <li>
-                <label>
-                <input type="checkbox">
-                Item 1
+                <input type="checkbox" id="check-5">
+                <label for="check-5">
+                  Item 5
                 </label>
               </li>
+              </li>
+
               <li>
-                <label>
-                <input type="checkbox">
-                Item 1
+                <input type="checkbox" id="check-6">
+                <label for="check-6">
+                  Item 6
                 </label>
               </li>
+              </li>
+
               <li>
-                <label>
-                <input type="checkbox">
-                Item 1
+                <input type="checkbox" id="check-7">
+                <label for="check-7">
+                  Item 7
                 </label>
               </li>
+              </li>
+
               <li>
-                <label>
-                <input type="checkbox">
-                Item 1
+                <input type="checkbox" id="check-8">
+                <label for="check-8">
+                  Item 8
                 </label>
               </li>
+
               <li>
-                <label>
-                <input type="checkbox">
-                Item 1
+                <input type="checkbox" id="check-9">
+                <label for="check-9">
+                  Item 9
                 </label>
               </li>
+
+
             </ul>
           </article>
-          <a class="open-button" href="#">Open Modal</a>
+          <a id="open-button" href="#">Open Modal</a>
       </section>
       <div class="modal">
         <h1>Todo: 06/16</h1>
         <p>
           "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
         </p>
-        <div class="close-button">X</div>
+        <a href="#" id="close-button">X</a>
       </div>
       <div class="modal-bg"></div>
     </main>

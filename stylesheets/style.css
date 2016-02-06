@@ -10,7 +10,7 @@ main {
   position: relative;;
 }
 
-.complete {
+#completed-todos li {
   text-decoration: line-through;
   color: #b3b3b3;
 }
@@ -56,6 +56,17 @@ h1, h2, h3, h4 ,h5 ,h6 {
   vertical-align: middle;
 }
 
+#menu h2:before {
+  content: "";
+  width: 27px;
+  height: 27px;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+  background: transparent url("../images/checkbox.png") 0 0 no-repeat;
+}
+
+
 #menu ul {
   width: 100%;
   padding: 0;
@@ -70,32 +81,6 @@ h1, h2, h3, h4 ,h5 ,h6 {
   text-indent: 80px;
 }
 
-.all-todos li.active a:hover {
-  cursor: default;
-}
-
-.all-todos li:not(.active):hover {
-  cursor: pointer;
-}
-
-.all-todos li:after,
-#menu > h1:after {
-  content: "8";
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-color: #6b7292;
-  font-size: 14px;
-  color: white;
-  border-radius: 100%;
-  text-align: center;
-  padding-top: 2px;
-  box-sizing: border-box;
-  margin-right: 20px;
-  text-indent: 0px;
-  float: right;
-}
-
 #menu ul li.active:after {
   background-color: #148fd5;
 }
@@ -107,21 +92,43 @@ h1, h2, h3, h4 ,h5 ,h6 {
   background: transparent url("../images/menu-icon.png") 0 0 no-repeat;
 }
 
-#menu h2:before {
-  content: "";
-  width: 27px;
-  height: 27px;
+/* only show pointer when hovering over a non-active li */
+
+#all-todos li:not(.active):hover {
+  cursor: pointer;
+}
+
+#all-todos li.active a:hover {
+  cursor: default;
+}
+
+  /*****************
+  number ball
+  note: if the number was dynamicly generated could this still be an :after element?
+  *****************/
+
+#all-todos li:after,
+#menu > h1:after {
+  content: "8";
   display: inline-block;
-  margin-right: 10px;
-  vertical-align: middle;
-  background: transparent url("../images/checkbox.png") 0 0 no-repeat;
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  background-color: #6b7292;
+  font-size: 14px;
+  color: white;
+  border-radius: 100%;
+  text-align: center;
+  padding-top: 2px;
+  box-sizing: border-box;
+  text-indent: 0px;
+  float: right;
 }
 
 .active {
   background: #383f5f;
   color: white;
 }
-
 
 /*****************
   #todo
@@ -130,6 +137,16 @@ h1, h2, h3, h4 ,h5 ,h6 {
 #todo-container {
   overflow: hidden;
   padding: 23px 25px;
+}
+
+#todo-container ul {
+  padding: 0;
+}
+
+#todo-container li {
+  list-style: none;
+  border-top: 1px solid #e7e7e7;
+  padding: 20px 0;
 }
 
 #todo-container li:after {
@@ -145,29 +162,14 @@ h1, h2, h3, h4 ,h5 ,h6 {
   cursor: pointer;
 }
 
-
-#todo-container:after {
-  content: "";
-  display: block;
-}
-
-#todo-container ul {
-  padding: 0;
-}
-
-#todo-container li {
-  list-style: none;
-  border-top: 1px solid #e7e7e7;
-  padding: 20px 0;
-}
-
 #todo-container label:hover {
   cursor: pointer;
   color: #60a9de;
 }
 
 
-/* Blue ball */
+/* Blue ball Should refactor becuase this repeats syles used in other ball shape
+    but if works for now*/
 #todo-title:after {
   content: "8";
   display: inline-block;
@@ -204,6 +206,14 @@ h1, h2, h3, h4 ,h5 ,h6 {
   margin-right: 10px;
 }
 
+[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+[type="checkbox"]:checked ~ label {
+  text-decoration: line-through;
+  color: #b3b3b3;
+}
 .current-todo a {
   color: #60a9de;
 }
@@ -236,7 +246,7 @@ modal
   display: none;
 }
 
-.close-button {
+#close-button {
   display: inline-block;
   position: absolute;;
   top: 10px;
@@ -245,23 +255,25 @@ modal
   padding: 5px;
 }
 
-.close-button:hover {
+#close-button:hover {
   cursor: pointer;
 }
 
+/*****************
+  media queries
+******************/
+
+/****
+  mobile
+*****/
 @media (max-width: 680px) {
+
   #menu {
-    width: 100%;
     display: none;
   }
 
-  .all-todos {
-    width: 100%;
-  }
   .modal {
     margin: 200px 0;
   }
-  #menu-icon {
-    display: none;
-  }
+
 }

@@ -94,6 +94,10 @@ a {
   background: transparent url("../images/menu-icon.png") 0 0 no-repeat;
 }
 
+
+.hide {
+  display: none;
+}
 /* only show pointer when hovering over a non-active li */
 
 #all-todos li:not(.active):hover {

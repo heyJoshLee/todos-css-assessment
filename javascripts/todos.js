@@ -18,6 +18,8 @@ $(function() {
   $("#menu-icon").on("click", function(e) {
     e.preventDefault();
     $("#menu").animate({width: "toggle"});
+    //$("#menu").fadeToggle();
+    //$("#menu").toggleClass("hide");
   });
 
   // Close modal

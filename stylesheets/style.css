@@ -105,7 +105,7 @@ a {
 #menu-icon {
   width: 25px;
   height: 25px;
-  margin-bottom: 1px;
+  margin-bottom: 6px;
   display: inline-block;
   background: transparent url("../images/menu-icon.png") 0 0 no-repeat;
 }
@@ -172,7 +172,7 @@ li.active > .circle {
 
 #todo-container {
   overflow: hidden;
-  padding: 23px 33px 0 33px;
+  padding: 23px 100px 0 33px;
   box-sizing: border-box;
 }
 
@@ -205,46 +205,41 @@ li.active > .circle {
 }
 
 #todo-title {
-  margin: 0;
+  font-size: 21px;
+  font-weight: normal;
+  display: inline-block;
+  margin-bottom: 36px;
 }
 
-
-/* Blue ball Should refactor becuase this repeats syles used in other ball shape
-    but if works for now*/
-#todo-title:after {
-  content: "8";
+#todo-title ~ .circle {
   display: inline-block;
-  width: 20px;
-  height: 20px;
   position: relative;
-  top: -4px;
-  background-color: #148fd5;
-  font-size: 14px;
+  top: -2px;
+  margin-left: 20px;
+  background: #148fd5;
   color: white;
-  border-radius: 100%;
-  text-align: center;
-  padding-top: 2px;
-  box-sizing: border-box;
-  margin-left: 12px;
+  float: none;
+  position: relative;
 }
 
 #add-button {
   font-size: 16px;
+  letter-spacing: 2px;
 }
 
 #add-button:before {
   content: "";
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+  width: 14px;
+  height: 14px;
+  margin-right: 15px;
   background:  url("../images/add.png") 0 0 no-repeat;
-  background-size: cover;
   vertical-align: middle;
 }
 
 [type="checkbox"] {
   margin-right: 10px;
+  opacity: .4;
 }
 
 [type="checkbox"]:hover {
@@ -254,6 +249,15 @@ li.active > .circle {
 [type="checkbox"]:checked ~ label {
   text-decoration: line-through;
   color: #b3b3b3;
+}
+[type="checkbox"]:before {
+  content: ".";
+  background: url("../images/check.png") 0 0 no-repeat;
+  position: relative;
+  left: 1px;
+  width: 14px;
+  height: 14px;
+  display: inline-block;;
 }
 .current-todo a {
   color: #60a9de;

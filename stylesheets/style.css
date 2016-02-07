@@ -15,6 +15,7 @@ main {
 #completed-todos li {
   text-decoration: line-through;
   color: #b3b3b3;
+  font-size: 16px;
 }
 
 a {
@@ -29,7 +30,7 @@ a {
 
 *, li, a {
   font-weight: normal;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 /*****************
@@ -37,10 +38,9 @@ a {
 ******************/
 #menu {
   background-color: #464f77;
-  width: 27%;
+  width: 335px;
   float: left;
   color: #b2b5c3;
-  padding: 80px 0 0 0;
 }
 
 #menu h1,
@@ -48,11 +48,27 @@ a {
   margin-left: 40px;
 }
 
+#menu h1 {
+  margin-top: 73px;
+  margin-left: 100px;
+  margin-bottom: -6px;
+  margin-right: 0;
+  font-size: 16px;
+  color: white;
+}
+
+#menu h2 {
+  margin-left: 100px;
+  margin-top: 56px;
+  font-size: 18px;
+  color: white;
+}
+
 #menu h1:before {
   content: "";
   width: 30px;
   height: 30px;
-  margin-right: 20px;
+  margin-right: 10px;
   display: inline-block;
   background: transparent url("../images/list-icon.png") 0 0 no-repeat;
   vertical-align: middle;
@@ -80,7 +96,7 @@ a {
   padding: 10px 0;
   margin: 0 0;
   width: 100%;
-  text-indent: 80px;
+  text-indent: 140px;
 }
 
 #menu ul li.active:after {
@@ -89,7 +105,7 @@ a {
 #menu-icon {
   width: 25px;
   height: 25px;
-  margin-bottom: 36px;
+  margin-bottom: 1px;
   display: inline-block;
   background: transparent url("../images/menu-icon.png") 0 0 no-repeat;
 }
@@ -108,26 +124,35 @@ a {
   cursor: default;
 }
 
+#all-todos li {
+  font-size: 16px;
+  margin-bottom: 100px;
+}
+
   /*****************
   number ball
   note: if the number was dynamicly generated could this still be an :after element?
   *****************/
 
-#all-todos li:after,
-#menu > h1:after {
-  content: "8";
+
+#menu > h1 + .circle {
+  top: -20px;
+}
+
+.circle {
+  height: 18px;
+  margin-right: 30px;
+  position: relative;
+  padding: 1px 5px;
+  text-align: center;
+  box-sizing: border-box;
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-right: 20px;
   background-color: #6b7292;
   font-size: 14px;
-  color: white;
+  text-indent: 0;
+  color: #c7c9d3;
   border-radius: 100%;
-  text-align: center;
-  padding-top: 2px;
-  box-sizing: border-box;
-  text-indent: 0px;
+  font-family: Helvetica;
   float: right;
 }
 
@@ -136,13 +161,19 @@ a {
   color: white;
 }
 
+li.active > .circle {
+  color: white;
+  background: #148fd5;
+}
+
 /*****************
   #todo
 ******************/
 
 #todo-container {
   overflow: hidden;
-  padding: 23px 25px;
+  padding: 23px 33px 0 33px;
+  box-sizing: border-box;
 }
 
 #todo-container ul {
@@ -171,6 +202,10 @@ a {
 #todo-container label:hover {
   cursor: pointer;
   color: #60a9de;
+}
+
+#todo-title {
+  margin: 0;
 }
 
 

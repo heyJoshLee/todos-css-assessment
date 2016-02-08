@@ -34,4 +34,9 @@ $(function() {
     $(".modal, .modal-bg").fadeIn();
   });
 
+  // Add button
+  $("#add-button").on("click", function(e) {
+    e.preventDefault();
+  });
+
 });

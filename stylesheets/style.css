@@ -183,7 +183,7 @@ li.active > .circle {
 #todo-container li {
   list-style: none;
   border-top: 1px solid #e7e7e7;
-  padding: 20px 0;
+  padding: 14px 0;
 }
 
 #todo-container li:after {
@@ -241,8 +241,8 @@ li.active > .circle {
   margin-right: 10px;
   vertical-align: middle;
   display: inline-block;;
-      width: 30px;
-      height: 30px;
+      width: 14px;
+      height: 14px;
       -webkit-appearance: none;
       outline: 0;
       background-repeat: no-repeat;
@@ -321,7 +321,8 @@ modal
 @media (max-width: 680px) {
 
   #menu {
-    display: none;
+    width: 0px;
+    /* display: none; */
   }
 
   .modal {

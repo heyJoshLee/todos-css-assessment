@@ -239,7 +239,22 @@ li.active > .circle {
 
 [type="checkbox"] {
   margin-right: 10px;
-  opacity: .4;
+  vertical-align: middle;
+  display: inline-block;;
+      width: 30px;
+      height: 30px;
+      -webkit-appearance: none;
+      outline: 0;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+}
+
+input[type=checkbox]:checked {
+  background-image: url("../images/check.png");
+}
+input[type=checkbox]:not(:checked) {
+    background-image: url("../images/unchecked.png");
 }
 
 [type="checkbox"]:hover {
@@ -250,15 +265,7 @@ li.active > .circle {
   text-decoration: line-through;
   color: #b3b3b3;
 }
-[type="checkbox"]:before {
-  content: ".";
-  background: url("../images/check.png") 0 0 no-repeat;
-  position: relative;
-  left: 1px;
-  width: 14px;
-  height: 14px;
-  display: inline-block;;
-}
+
 .current-todo a {
   color: #60a9de;
 }

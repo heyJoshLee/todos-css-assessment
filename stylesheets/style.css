@@ -129,11 +129,6 @@ a {
   margin-bottom: 100px;
 }
 
-  /*****************
-  number ball
-  note: if the number was dynamicly generated could this still be an :after element?
-  *****************/
-
 
 #menu > h1 + .circle {
   top: -20px;
@@ -206,7 +201,7 @@ li.active > .circle {
 
 #todo-title {
   font-size: 21px;
-  font-weight: normal;
+  font-weight: 200;
   display: inline-block;
   margin-bottom: 36px;
 }

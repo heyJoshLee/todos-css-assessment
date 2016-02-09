@@ -5,20 +5,17 @@
     <title>Todos</title>
     <link rel="stylesheet" href="stylesheets/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script scr="javascripts/handlebars-v4.0.5"></script>
+    <script src="javascripts/handlebars-v4.0.5.js"></script>
     <script src="javascripts/todos.js"></script>
   </head>
   <body>
     <main>
       <section id="menu">
+        <a href="#"><img src="images/white-plus.png" alt="Add List"  id="add-list"/></a>
         <h1>All Todos</h1><div class="circle">18</div>
 
         <ul id="all-todos">
-          <li class="active"><a href="#">02/16</a><div class="circle">8</div></li>
-          <li><a href="#">03/16</a><div class="circle">2</div></li>
-          <li><a href="#">04/16</a><div class="circle">1</div></li>
-          <li><a href="#">05/16</a><div class="circle">1</div></li>
-          <li><a href="#">06/16</a><div class="circle">6</div></li>
+
         </ul>
 
         <h2>Completed</h2>
@@ -36,77 +33,7 @@
       <section id="todo-container">
           <a id="menu-icon" href="#"></a>
 
-          <article class="current-todo">
-
-            <h2 id="todo-title">02/16</h2><div class="circle">8</div><br />
-
-            <a id="add-button" href="#">Add new to do</a>
-            <ul>
-
-              <li>
-                <input type="checkbox" id="check-1">
-                <label for="check-1">
-                  Item 1
-                </label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="check-2">
-                <label for="check-2">
-                  Item 2
-                </label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="check-3">
-                <label for="check-3">
-                  Item 3
-                </label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="check-4">
-                <label for="check-4">
-                  Item 4
-                </label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="check-5">
-                <label for="check-5">
-                  Item 5
-                </label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="check-6">
-                <label for="check-6">
-                  Item 6
-                </label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="check-7">
-                <label for="check-7">
-                  Item 7
-                </label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="check-8">
-                <label for="check-8">
-                  Item 8
-                </label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="check-9">
-                <label for="check-9">
-                  Item 9
-                </label>
-              </li>
-            </ul>
-
+          <article id="current-todo">
           </article>
 
           <a id="open-button" href="#">Open Modal</a>
@@ -122,5 +49,31 @@
       <div class="modal-bg"></div>
 
     </main>
+
+    <!--- templates -->
+    <script type="x-handlebars-template" id="all-todos-template">
+    {{#each lists}}
+      <li><a href="#>">{{title}}</a></li>
+    {{/each}}
+    </script>
+
+    <script type="x-handlebars-template" id="current-todo-template">
+      <h2 id="todo-title">{{todo.title}}</h2><div class="circle">{{lists.length}}</div><br />
+
+      <a id="add-button" href="#">Add new to do</a>
+
+      <ul>
+      {{#each lists}}
+        <li>
+          <input type="checkbox" id="check-9">
+          <label for="check-9">
+            {{this}}
+          </label>
+        </li>
+        {{/each}}
+      </ul>
+    </script>
+
+
   </body>
 </html>

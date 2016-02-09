@@ -112,6 +112,12 @@ a {
   background: transparent url("../images/menu-icon.png") 0 0 no-repeat;
 }
 
+#add-list {
+  width: 40px;
+  position: absolute;
+  top: 20px;
+  left: 90px;
+}
 
 .hide {
   display: none;
@@ -263,7 +269,7 @@ input[type=checkbox]:not(:checked) {
   color: #b3b3b3;
 }
 
-.current-todo a {
+#current-todo a {
   color: #60a9de;
 }
 

@@ -236,13 +236,13 @@ li.active > .circle {
   margin-right: 10px;
   vertical-align: middle;
   display: inline-block;;
-      width: 14px;
-      height: 14px;
-      -webkit-appearance: none;
-      outline: 0;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
+  width: 14px;
+  height: 14px;
+  -webkit-appearance: none;
+  outline: 0;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
 }
 
 input[type=checkbox]:checked {

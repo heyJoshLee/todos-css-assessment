@@ -3,6 +3,8 @@
 /*****************
   main
 ******************/
+
+
 html, body, main {
   height: 100%;
   padding: 0;
@@ -106,7 +108,7 @@ a {
   width: 25px;
   height: 25px;
   margin-bottom: 6px;
-  display: inline-block;
+  display: none;
   background: transparent url("../images/menu-icon.png") 0 0 no-repeat;
 }
 
@@ -319,6 +321,10 @@ modal
     width: 0px;
     visibility: hidden;
     /* display: none; */
+  }
+
+  #menu-icon {
+    display: inline-block;
   }
 
   .modal {

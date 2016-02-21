@@ -95,8 +95,8 @@ $(function() {
         $id = $this.attr("data-id"),
         item = findWhere("id", $id, todos);
         item.checked = !item.checked;
-        console.log(item);
-
+        saveLocalStorage();
+        render();
   });
 
   // Find object in collection
@@ -143,7 +143,8 @@ $(function() {
 
   // Render HTML in #current_todos
   function render() {
-    $("#current_todos").html(templates.current_todos({todos: todos}));
+    var sorted = sortedTodos(todos);
+    $("#current_todos").html(templates.current_todos({todos: sorted}));
   }
 
   // Load information from localStorage
@@ -166,7 +167,7 @@ $(function() {
   // Load page
   function init() {
     loadTodos();
-    render();
+    render(sortedTodos());
   }
 
   // Fill in Modal
@@ -176,6 +177,19 @@ $(function() {
 
   function fadeOutModal() {
     $("#modal, #modal_bg").fadeOut();
+  }
+
+  function sortedTodos(array){
+    var uncomplete = [],
+        complete = [];
+    for(var i = 0; i < todos.length; i++) {
+      if (todos[i].checked) {
+        complete.push(todos[i]);
+      } else {
+        uncomplete.push(todos[i]);
+      }
+    }
+    return uncomplete.concat(complete);
   }
 
 

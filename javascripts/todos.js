@@ -47,10 +47,27 @@ $(function() {
   $("#current_todos").on("click", ".trash_can", function(e) {
     e.preventDefault();
     var id = $(this).attr("data-id");
-    delete todos[id - 1];
+    var item_to_delete = find_where("id", id, todos);
+    var spot = todos.indexOf(item_to_delete);
+    if (spot === -1) {
+      alert("can't find");
+      return; 
+    }
+    todos.splice(todos.indexOf(item_to_delete), 1);
+    console.log("id to delete: " + id);
     console.log(todos);
     render();
   });
+
+  function find_where(key, value, collection) {
+    var match;
+    for(var i = 0; i < collection.length; i++) {
+      if (collection[i][key] === +value) {
+        match = collection[i];
+      }
+    }
+    return match;
+  }
 
   // Add list button
   $("#add-list").on("click", function(e) {
@@ -61,21 +78,17 @@ $(function() {
 
   var templates = {},
       todos = [];
+      Todo.created = 0;
 
   function Todo(params) {
       Todo.created++;
+      localStorage.setItem("Todo_created", Todo.created);
       this.name = params.name;
       this.date = "No date yet";
       this.id = Todo.created;
       todos.push(this);
-      console.log(todos);
       console.log("Created todos: " + Todo.created);
   }
-
-  Todo.created = 0;
-
-  new Todo({name: "Walk the dog"});
-
 
 
 
@@ -86,11 +99,24 @@ $(function() {
 
   function render() {
     $("#current_todos").html(templates.current_todos({todos: todos}));
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }
+
+  function loadTodos() {
+    if (localStorage.getItem("todos")) {
+      todos = JSON.parse(localStorage.getItem("todos"));
+    };
+
+    if (localStorage.getItem("Todo_created")) {
+      Todo.created = +localStorage.getItem("Todo_created");
+    }
   }
 
   function init() {
+    loadTodos();
     render();
     console.log("rendered!");
+    console.log(todos);
   }
 
   init();

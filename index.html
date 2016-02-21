@@ -11,8 +11,7 @@
   <body>
     <main>
       <section id="menu">
-        <a href="#"><img src="images/white-plus.png" alt="Add List"  id="add-list"/></a>
-        <h1>All Todos</h1><div class="circle">18</div>
+
 
         <ul id="dates">
 
@@ -95,6 +94,7 @@
     </script>
 
     <script type="x-handlebars-template" id="dates">
+    <a><h1 id="all_todos_button">All Todos</h1></a><span class="circle">18</span>
       {{#each dates}}
         {{> date}}
       {{/each}}
@@ -102,7 +102,7 @@
 
     <!--- templates -->
     <script type="x-handlebars-template" id="date">
-      <li><a href="#>">{{name}}</a></li>
+      <li><a href="#>">{{this}}</a></li>
     </script>
 
   </body>

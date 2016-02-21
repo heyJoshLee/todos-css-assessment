@@ -7,10 +7,21 @@ $(function() {
 // hightlight date
   $("#dates").on("click", "li", function(e) {
     e.preventDefault();
-    var $this = $(this);
+    var $this = $(this),
+        date = $this.find("a").html();
     $this.closest("ul").find(".active").removeClass("active");
     $(this).addClass("active");
+    loadTodosByDate(date);
   });
+
+  $("#menu").on("click", "#all_todos_button", function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        date = $this.html();
+      $this.closest("ul").find(".active").removeClass("active");
+      $(this).addClass("active");
+      render();
+  })
 
   // Toggle date_menu
   $("#menu-icon").on("click", function(e) {
@@ -38,11 +49,15 @@ $(function() {
   $("#modal_container").on("click", ".save", function(e) {
     e.preventDefault()
     var $this = $(this),
-        new_value = $(".add_date > input").val();
+        new_value = $(".add_date > input").val(),
+        item = findWhere("id", current_todo.id, todos) ;
 
-    findWhere("id", current_todo.id, todos).date = new_value ;
+    item.date = new_value;
     $("#modal_container").html(templates.modal(current_todo));
+    createNewDate(item);
     fadeOutModal();
+    renderDates();
+    saveLocalStorage();
     render();
   });
 
@@ -56,7 +71,6 @@ $(function() {
     saveLocalStorage();
     fadeOutModal();
     render();
-    console.log(item);
   });
 
   // Add new Todo
@@ -110,17 +124,12 @@ $(function() {
     return match;
   }
 
-  // Add list button
-  $("#add-list").on("click", function(e) {
-    e.preventDefault();
-  });
-
  // Handlebars
 
   var templates = {},
       todos = [],
       current_todo,
-      dates = [{name: "12/25", todos: []}];
+      dates = [];
       Todo.created = 0;
 
   function Todo(params) {
@@ -132,9 +141,24 @@ $(function() {
       this.checked = false;
       todos.push(this);
       saveLocalStorage();
-      console.log("Created todos: " + Todo.created);
   }
 
+  function loadTodosByDate(date) {
+    var todosByDate = findManyWhere("date", date, todos);
+    console.log("date is: " + date);
+    console.log("todosByDate is: " + todosByDate);
+    $("#current_todos").html(templates.current_todos({todos: todosByDate}));
+  }
+
+  function findManyWhere(key, value, collection) {
+    var matches = [];
+    for(var i = 0; i < collection.length; i++) {
+      if (collection[i][key] === value) {
+        matches.push(collection[i]);
+      }
+    }
+    return matches;
+  }
 
   // Compile Handlebars tempaltes
   $("[type='x-handlebars-template']").each(function(template) {
@@ -144,6 +168,10 @@ $(function() {
 
   // Render HTML in #current_todos
   function render() {
+    if (arguments.length > 1) {
+      console.log("change!");
+      loadTodosByDate(arguments[0])
+    }
     var sorted = sortedTodos(todos);
     $("#current_todos").html(templates.current_todos({todos: sorted}));
   }
@@ -159,9 +187,19 @@ $(function() {
     }
   }
 
+  function loadDates() {
+    if (localStorage.getItem("dates")) {
+      dates = JSON.parse(localStorage.getItem("dates"));
+    } else {
+      dates = []
+    }
+  }
+
+
   // Save items to localStorage
   function saveLocalStorage() {
     localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem("dates", JSON.stringify(dates));
     localStorage.setItem("Todo_created", Todo.created);
   }
 
@@ -189,8 +227,8 @@ $(function() {
   }
 
 
-  function updateDates() {
-    $("#dates").html(templates.dates({dates: dates}))
+  function renderDates() {
+    $("#dates").html(templates.dates({dates: dates}));
   }
 
   Handlebars.registerPartial("date", $("#date").html());
@@ -198,11 +236,17 @@ $(function() {
   // Load page
   function init() {
     loadTodos();
-    updateDates();
+    loadDates();
+    renderDates();
     render(sortedTodos());
   }
 
-
+  function createNewDate(todo) {
+      // if date doesn't
+    if (dates.indexOf(todo.date) === -1) {
+      dates.push(todo.date);
+    }
+  }
   init();
 
 

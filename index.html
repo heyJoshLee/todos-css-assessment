@@ -34,16 +34,25 @@
           <a id="open-button" href="#">Open Modal</a>
       </section>
 
-      <div class="modal">
-        <h1>Todo: 02/16</h1>
-        <p>
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-        </p>
-        <a href="#" id="close-button">X</a>
-      </div>
-      <div class="modal-bg"></div>
+      <div id="modal_container"></div>
 
     </main>
+
+    <script type="x-handlebars-template" id="modal">
+      <div id="modal">
+        <h1>{{name}}</h1>
+          {{# if date}}
+          <a class="add_date">{{date}}</a>
+          {{else}}
+          <a class="add_date">Add date</a>
+          {{/if}}
+        <p>
+          {{body}} Body
+        </p>
+        <a href="#" id="close_button">X</a>
+      </div>
+      <div id="modal_bg"></div>
+    </script>
 
     <!--- templates -->
     <script type="x-handlebars-template" id="all_todos">
@@ -66,13 +75,22 @@
           <input id="{{{id}}}" type="checkbox">
         {{/if}}
           <label>
-            {{name}} <a class="trash_can" data-id={{id}}></a>
+            <a class="modal_launcher">
+              {{name}}
+              {{#if date}}
+                / {{date}}
+              {{/if}}
+              </a>
+            <a class="trash_can" data-id={{id}}></a>
           </label>
         </li>
         {{/each}}
       </ul>
     </script>
 
+    <script type="x-handlebars-template" id="edit_date">
+      <input type="text" data-id="{{id}}" value="{{date}}">
+    </script>
 
   </body>
 </html>

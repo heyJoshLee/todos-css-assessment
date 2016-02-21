@@ -25,16 +25,26 @@ $(function() {
   });
 
   // Close modal
-  $("#close-button, .modal-bg").on("click", function(e) {
+  $(document).on("click", "#close_button, #modal_bg", function(e) {
     e.preventDefault();
-    $(".modal, .modal-bg").fadeOut();
+    $("#modal, #modal_bg").fadeOut();
   });
 
-  // Open modal
-  $("#open-button").on("click", function(e) {
+  $("#modal_container").on("dblclick", ".add_date", function(e) {
     e.preventDefault();
-    $(".modal, .modal-bg").fadeIn();
+    var $this = $(this);
+    $this.html(templates.edit_date(current_todo));
+    console.log("Come add the date");
   });
+
+  $("#modal_container").on("blur", ".add_date input", function(e) {
+    var $this = $(this);
+    find_where("id", current_todo.id, todos).date = $this.val();
+    console.log("blur");
+    $("#modal_container").html(templates.modal(current_todo));
+    render();
+  });
+
 
   // Add button
   $("#current_todos").on("click", "#add_button", function(e) {
@@ -44,6 +54,14 @@ $(function() {
     render();
   });
 
+  $("#current_todos").on("click", ".modal_launcher", function(e) {
+    var $id = $(this).next(".trash_can").attr("data-id");
+    $("#modal, #modal_bg").fadeIn();
+    current_todo = find_where("id", $id, todos);
+    console.log("current todo:  " + current_todo.name);
+    showModal(current_todo);
+  })
+
   $("#current_todos").on("click", ".trash_can", function(e) {
     e.preventDefault();
     var id = $(this).attr("data-id");
@@ -51,7 +69,7 @@ $(function() {
     var spot = todos.indexOf(item_to_delete);
     if (spot === -1) {
       alert("can't find");
-      return; 
+      return;
     }
     todos.splice(todos.indexOf(item_to_delete), 1);
     console.log("id to delete: " + id);
@@ -77,15 +95,17 @@ $(function() {
  // Handlebars
 
   var templates = {},
-      todos = [];
+      todos = [],
+      current_todo;
       Todo.created = 0;
 
   function Todo(params) {
       Todo.created++;
       localStorage.setItem("Todo_created", Todo.created);
       this.name = params.name;
-      this.date = "No date yet";
+      this.date = undefined;
       this.id = Todo.created;
+      this.body = "";
       todos.push(this);
       console.log("Created todos: " + Todo.created);
   }
@@ -118,6 +138,12 @@ $(function() {
     console.log("rendered!");
     console.log(todos);
   }
+
+  function showModal(current_todo) {
+    $("#modal_container").html(templates.modal(current_todo));
+    console.log("fill in modal with " + current_todo);
+  }
+
 
   init();
 

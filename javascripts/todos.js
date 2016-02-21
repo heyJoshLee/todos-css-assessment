@@ -11,6 +11,8 @@ $(function() {
         date = $this.find("a").html();
     $this.closest("ul").find(".active").removeClass("active");
     $(this).addClass("active");
+    current_date = date;
+    console.log("current date is : " + current_date);
     loadTodosByDate(date);
   });
 
@@ -70,6 +72,7 @@ $(function() {
     $("#current_todos").find("#" + $id).attr("checked", "checked");
     saveLocalStorage();
     fadeOutModal();
+    renderDates();
     render();
   });
 
@@ -78,6 +81,12 @@ $(function() {
     e.preventDefault();
     var input = $("#new_todo_input").val();
     new Todo({name: input});
+
+    $("#menu").find(".active").removeClass("active");
+    $("h1#all_todos_button").addClass("active");
+
+    $(this).addClass("active");
+    renderDates();
     render();
   });
 
@@ -100,7 +109,7 @@ $(function() {
       return;
     }
     todos.splice(todos.indexOf(item_to_delete), 1);
-    render();
+    loadTodosByDate(current_date);
   });
 
   // Check box changes 'checked' attribute of Todo
@@ -110,6 +119,7 @@ $(function() {
         item = findWhere("id", $id, todos);
         item.checked = !item.checked;
         saveLocalStorage();
+        renderDates();
         render();
   });
 
@@ -130,7 +140,8 @@ $(function() {
       todos = [],
       current_todo,
       dates = [];
-      Todo.created = 0;
+      Todo.created = 0,
+      current_date = "Title";
 
   function Todo(params) {
       Todo.created++;
@@ -145,9 +156,19 @@ $(function() {
 
   function loadTodosByDate(date) {
     var todosByDate = findManyWhere("date", date, todos);
-    console.log("date is: " + date);
-    console.log("todosByDate is: " + todosByDate);
-    $("#current_todos").html(templates.current_todos({todos: todosByDate}));
+    $("#current_todos").html(templates.current_todos({todos: sortedArray(todosByDate), list_name: date, todos_length: incompleteItems(todosByDate).length}));
+  }
+
+  function incompleteItems(array) {
+    var arr = [];
+
+    for(var i = 0; i < array.length; i++) {
+      if (!array[i].checked) {
+        arr.push(array[i]);
+      }
+    }
+
+    return arr;
   }
 
   function findManyWhere(key, value, collection) {
@@ -168,12 +189,8 @@ $(function() {
 
   // Render HTML in #current_todos
   function render() {
-    if (arguments.length > 1) {
-      console.log("change!");
-      loadTodosByDate(arguments[0])
-    }
-    var sorted = sortedTodos(todos);
-    $("#current_todos").html(templates.current_todos({todos: sorted}));
+    var sorted = sortedArray(todos);
+    $("#current_todos").html(templates.current_todos({todos: sorted, list_name: current_date, todos_length: incompleteItems(sorted).length}));
   }
 
   // Load information from localStorage
@@ -213,22 +230,22 @@ $(function() {
     $("#modal, #modal_bg").fadeOut();
   }
 
-  function sortedTodos(array){
-    var uncomplete = [],
+  function sortedArray(array){
+    var incomplete = [],
         complete = [];
-    for(var i = 0; i < todos.length; i++) {
+    for(var i = 0; i < array.length; i++) {
       if (todos[i].checked) {
         complete.push(todos[i]);
       } else {
-        uncomplete.push(todos[i]);
+        incomplete.push(todos[i]);
       }
     }
-    return uncomplete.concat(complete);
+    return incomplete.concat(complete);
   }
 
 
   function renderDates() {
-    $("#dates").html(templates.dates({dates: dates}));
+    $("#dates").html(templates.dates({dates: dates, incomplete_items: incompleteItems(todos).length }));
   }
 
   Handlebars.registerPartial("date", $("#date").html());
@@ -238,7 +255,7 @@ $(function() {
     loadTodos();
     loadDates();
     renderDates();
-    render(sortedTodos());
+    render();
   }
 
   function createNewDate(todo) {

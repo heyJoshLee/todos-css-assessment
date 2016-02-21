@@ -14,7 +14,7 @@
         <a href="#"><img src="images/white-plus.png" alt="Add List"  id="add-list"/></a>
         <h1>All Todos</h1><div class="circle">18</div>
 
-        <ul id="all-todos">
+        <ul id="dates">
 
         </ul>
 
@@ -59,12 +59,7 @@
       <div id="modal_bg"></div>
     </script>
 
-    <!--- templates -->
-    <script type="x-handlebars-template" id="all_todos">
-    {{#each FIXME}}
-      <li><a href="#>">{{title}}</a></li>
-    {{/each}}
-    </script>
+
 
     <script type="x-handlebars-template" id="current_todos">
       <h2 id="todo-title">{{todo.title}}</h2><div class="circle">{{lists.length}}</div><br />
@@ -97,6 +92,17 @@
 
     <script type="x-handlebars-template" id="edit_date">
       <input type="text" data-id="{{id}}" value="{{date}}">
+    </script>
+
+    <script type="x-handlebars-template" id="dates">
+      {{#each dates}}
+        {{> date}}
+      {{/each}}
+    </script>
+
+    <!--- templates -->
+    <script type="x-handlebars-template" id="date">
+      <li><a href="#>">{{name}}</a></li>
     </script>
 
   </body>

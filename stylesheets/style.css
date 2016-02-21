@@ -131,15 +131,15 @@ a {
 }
 /* only show pointer when hovering over a non-active li */
 
-#all-todos li:not(.active):hover {
+#dates li:not(.active):hover {
   cursor: pointer;
 }
 
-#all-todos li.active a:hover {
+#dates li.active a:hover {
   cursor: default;
 }
 
-#all-todos li {
+#dates li {
   font-size: 16px;
   margin-bottom: 100px;
 }

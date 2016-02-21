@@ -5,7 +5,7 @@ $(function() {
 /////////////
 
 // hightlight date
-  $("#all-todos").on("click", "li", function(e) {
+  $("#dates").on("click", "li", function(e) {
     e.preventDefault();
     var $this = $(this);
     $this.closest("ul").find(".active").removeClass("active");
@@ -119,7 +119,8 @@ $(function() {
 
   var templates = {},
       todos = [],
-      current_todo;
+      current_todo,
+      dates = [{name: "12/25", todos: []}];
       Todo.created = 0;
 
   function Todo(params) {
@@ -164,11 +165,6 @@ $(function() {
     localStorage.setItem("Todo_created", Todo.created);
   }
 
-  // Load page
-  function init() {
-    loadTodos();
-    render(sortedTodos());
-  }
 
   // Fill in Modal
   function showModal(current_todo) {
@@ -190,6 +186,20 @@ $(function() {
       }
     }
     return uncomplete.concat(complete);
+  }
+
+
+  function updateDates() {
+    $("#dates").html(templates.dates({dates: dates}))
+  }
+
+  Handlebars.registerPartial("date", $("#date").html());
+
+  // Load page
+  function init() {
+    loadTodos();
+    updateDates();
+    render(sortedTodos());
   }
 
 

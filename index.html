@@ -31,7 +31,6 @@
           <article id="current_todos">
           </article>
 
-          <a id="open-button" href="#">Open Modal</a>
       </section>
 
       <div id="modal_container"></div>
@@ -39,7 +38,7 @@
     </main>
 
     <script type="x-handlebars-template" id="modal">
-      <div id="modal">
+      <div id="modal" data-id="{{id}}">
         <h1>{{name}}</h1>
           {{# if date}}
           <a class="add_date">{{date}}</a>
@@ -50,7 +49,12 @@
         <a class="save">
         Save
         </a>
-        <a href="#" id="close_button">X</a>
+        <a href="#" id="close_button">X</a></br>
+        {{# if checked}}
+          <a href="#" class="complete mark_as_complete">Marked as checked</a>
+          {{else}}
+        <a href="#" class="mark_as_complete">Mark as complete</a>
+        {{/ if}}
       </div>
       <div id="modal_bg"></div>
     </script>
@@ -70,11 +74,13 @@
       <ul>
       {{#each todos}}
         <li>
+
         {{#if this.checked}}
-          <input type="checkbox" checked>
+          <input type="checkbox" data-id="{{id}}" checked>
           {{else}}
-          <input id="{{{id}}}" type="checkbox">
+          <input type="checkbox" data-id="{{id}}">
         {{/if}}
+
           <label>
             <a class="modal_launcher">
               {{name}}

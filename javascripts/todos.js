@@ -37,11 +37,14 @@ $(function() {
     console.log("Come add the date");
   });
 
-  $("#modal_container").on("blur", ".add_date input", function(e) {
+  $("#modal_container").on("click", ".save", function(e) {
+    e.preventDefault()
     var $this = $(this);
-    find_where("id", current_todo.id, todos).date = $this.val();
-    console.log("blur");
+    var new_value = $(".add_date > input").val();
+    console.log(new_value)
+    find_where("id", current_todo.id, todos).date = new_value ;
     $("#modal_container").html(templates.modal(current_todo));
+    $("#modal, #modal_bg").fadeOut();
     render();
   });
 

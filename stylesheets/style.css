@@ -189,8 +189,7 @@ li.active > .circle {
   padding: 14px 0;
 }
 
-#todo-container li:after {
-  content: "";
+.trash_can {
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -225,12 +224,12 @@ li.active > .circle {
   position: relative;
 }
 
-#add-button {
+#add_button {
   font-size: 16px;
   letter-spacing: 2px;
 }
 
-#add-button:before {
+#add_button:before {
   content: "";
   display: inline-block;
   width: 14px;
@@ -269,7 +268,7 @@ input[type=checkbox]:not(:checked) {
   color: #b3b3b3;
 }
 
-#current-todo a {
+#current-todos a {
   color: #60a9de;
 }
 

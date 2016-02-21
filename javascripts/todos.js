@@ -37,8 +37,19 @@ $(function() {
   });
 
   // Add button
-  $("#add-button").on("click", function(e) {
+  $("#current_todos").on("click", "#add_button", function(e) {
     e.preventDefault();
+    var input = $("#new_todo_input").val();
+    new Todo({name: input});
+    render();
+  });
+
+  $("#current_todos").on("click", ".trash_can", function(e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    delete todos[id - 1];
+    console.log(todos);
+    render();
   });
 
   // Add list button
@@ -46,72 +57,48 @@ $(function() {
     e.preventDefault();
   });
 
+ // Handlebars
 
-  // Handlebars
+  var templates = {},
+      todos = [];
 
-  var lists = [
-    {
-      title: "02/16",
-      todos: [
-        "Item 1",
-        "Item 2",
-        "Item 3",
-        "Item 4",
-        "Item 5",
-        "Item 6",
-        "Item 7",
-        "Item 8",
-        "Item 10"
-      ]
-    },
-    {
-      title: "03/16",
-      todos: [
-        "Cool 1",
-        "Cool 2",
-        "Cool 3",
-        "Cool 4",
-        "Cool 5",
-        "Cool 6",
-        "Cool 7",
-        "Cool 8",
-        "Cool 10"
-      ]
-    },
-    {
-      title: "04/16",
-      todos: [
-        "Third 1",
-        "Third 2",
-        "Third 3",
-        "Third 4",
-        "Third 5",
-        "Third 6",
-        "Third 7",
-        "Third 8",
-        "Third 10"
-      ]
-    }
-  ];
-  var current_todo = lists[0];
-  var current_todo_items = current_todo.todos
+  function Todo(params) {
+      Todo.created++;
+      this.name = params.name;
+      this.date = "No date yet";
+      this.id = Todo.created;
+      todos.push(this);
+      console.log(todos);
+      console.log("Created todos: " + Todo.created);
+  }
+
+  Todo.created = 0;
+
+  new Todo({name: "Walk the dog"});
 
 
-  var completed_lists = [];
 
-  var temp = Handlebars.compile($("#all-todos-template").html());
-  var temp2 = Handlebars.compile($("#current-todo-template").html());
 
-  $("#all-todos").html(temp({lists: lists}));
-
-  $("#all-todos").on("click", "li", function(e) {
-    e.preventDefault();
-    var current = $("#all-todos li").index(this);
-    current_todo = lists[current];
-    current_todo_items = current_todo.todos;
-    $("#current-todo").html(temp2({todo: current_todo, lists: current_todo.todos}));
-
+  $("[type='x-handlebars-template']").each(function(template) {
+    var $template = $(this);
+    templates[$template.attr("id")] = Handlebars.compile($template.html());
   });
+
+  function render() {
+    $("#current_todos").html(templates.current_todos({todos: todos}));
+  }
+
+  function init() {
+    render();
+    console.log("rendered!");
+  }
+
+  init();
+
+
+
+
+
 
 
 

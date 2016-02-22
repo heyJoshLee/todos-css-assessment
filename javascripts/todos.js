@@ -54,11 +54,15 @@ $(function() {
     e.preventDefault()
     var $this = $(this),
         new_value = $(".add_date > input").val(),
-        item = findWhere("id", current_todo.id, todos) ;
+        item = findWhere("id", current_todo.id, todos),
+        old_date = item.date;
 
     item.date = new_value;
+    console.log("old date:" + old_date)
+
     $("#modal_container").html(templates.modal(current_todo));
     createNewDate(item);
+    checkToDeleteDate(old_date);
     fadeOutModal();
     renderDates();
     saveLocalStorage();
@@ -229,14 +233,17 @@ $(function() {
     localStorage.setItem("Todo_created", Todo.created);
   }
 
-
+  // Checks to see if dates don't have todo items, if so then the date is deleted
   function checkToDeleteDate(d) {
     if (dates.indexOf(d) === -1) {
+      console.log("Can't find " + d + "in dates!");
       return false;
     } else {
-      if (findManyWhere("date", d, todos).length === 1) {
+      if (findManyWhere("date", d, todos).length <= 1) {
         console.log("section to splice: " + dates.indexOf(d));
         dates.splice(dates.indexOf(d), 1);
+      } else {
+        console.log("length " + findManyWhere("date", d, todos).length);
       }
     }
   }

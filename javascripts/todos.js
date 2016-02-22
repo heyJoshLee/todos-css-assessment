@@ -23,6 +23,7 @@ $(function() {
         date = $this.html();
       $this.closest("ul").find(".active").removeClass("active");
       $(this).addClass("active");
+      current_date = "All Todos";
       render();
   })
 
@@ -109,6 +110,8 @@ $(function() {
       alert("can't find");
       return;
     }
+    checkToDeleteDate();
+
     todos.splice(todos.indexOf(item_to_delete), 1);
     saveLocalStorage();
     renderDates();
@@ -218,7 +221,6 @@ $(function() {
     }
   }
 
-
   // Save items to localStorage
   function saveLocalStorage() {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -227,9 +229,26 @@ $(function() {
   }
 
 
+
+  function renderDates() {
+    $("#dates").html(templates.dates({dates: dates, incomplete_items: incompleteItems(todos).length }));
+  }
+
+
   // Fill in Modal
   function showModal(current_todo) {
     $("#modal_container").html(templates.modal(current_todo));
+  }
+
+  function allDatesIn(array) {
+    var allDates = [];
+    for(var i = 0; i < array.length; i++) {
+      var dateToAdd = array[i].date
+      if (allDates.indexOf(dateToAdd) === -1) {
+        allDates.push(dateToAdd);
+      }
+    }
+    return allDates;
   }
 
   function fadeOutModal() {
@@ -250,9 +269,6 @@ $(function() {
   }
 
 
-  function renderDates() {
-    $("#dates").html(templates.dates({dates: dates, incomplete_items: incompleteItems(todos).length }));
-  }
 
 
   // Load page
@@ -264,7 +280,7 @@ $(function() {
   }
 
   function createNewDate(todo) {
-      // if date doesn't
+      // if date doesn't exsist
     if (dates.indexOf(todo.date) === -1) {
       dates.push(todo.date);
     }

@@ -16,6 +16,7 @@ $(function() {
     loadTodosByDate(date);
   });
 
+  // hightlight all_todos_button
   $("#menu").on("click", "#all_todos_button", function(e) {
     e.preventDefault();
     var $this = $(this),
@@ -26,7 +27,7 @@ $(function() {
   })
 
   // Toggle date_menu
-  $("#menu-icon").on("click", function(e) {
+  $("#menu_icon").on("click", function(e) {
     e.preventDefault();
     var $menu = $("#menu");
     $menu.animate({width: "toggle"});
@@ -109,7 +110,9 @@ $(function() {
       return;
     }
     todos.splice(todos.indexOf(item_to_delete), 1);
-    loadTodosByDate(current_date);
+    saveLocalStorage();
+    renderDates();
+    render();
   });
 
   // Check box changes 'checked' attribute of Todo
@@ -156,6 +159,7 @@ $(function() {
 
   function loadTodosByDate(date) {
     var todosByDate = findManyWhere("date", date, todos);
+    console.log(incompleteItems(todosByDate));
     $("#current_todos").html(templates.current_todos({todos: sortedArray(todosByDate), list_name: date, todos_length: incompleteItems(todosByDate).length}));
   }
 
@@ -186,6 +190,8 @@ $(function() {
     var $template = $(this);
     templates[$template.attr("id")] = Handlebars.compile($template.html());
   });
+
+  Handlebars.registerPartial("date", $("#date").html());
 
   // Render HTML in #current_todos
   function render() {
@@ -235,9 +241,9 @@ $(function() {
         complete = [];
     for(var i = 0; i < array.length; i++) {
       if (todos[i].checked) {
-        complete.push(todos[i]);
+        complete.push(array[i]);
       } else {
-        incomplete.push(todos[i]);
+        incomplete.push(array[i]);
       }
     }
     return incomplete.concat(complete);
@@ -248,7 +254,6 @@ $(function() {
     $("#dates").html(templates.dates({dates: dates, incomplete_items: incompleteItems(todos).length }));
   }
 
-  Handlebars.registerPartial("date", $("#date").html());
 
   // Load page
   function init() {

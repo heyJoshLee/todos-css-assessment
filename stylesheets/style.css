@@ -111,11 +111,13 @@ a {
 #menu ul li.active:after {
   background-color: #148fd5;
 }
-#menu-icon {
+#menu_icon {
   width: 25px;
   height: 25px;
   margin-bottom: 6px;
-  display: none;
+  display: inline-block;
+  position: relative;
+  top: 10px;
   background: transparent url("../images/menu-icon.png") 0 0 no-repeat;
 }
 

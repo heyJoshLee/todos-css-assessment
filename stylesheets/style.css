@@ -362,8 +362,8 @@ modal
 
 .hint {
   margin-left: 20px;
+
   text-transform: lowercase;
-  padding-bottom: 30px;
   color: rgba(20, 20, 20, 0.5);
 }
 

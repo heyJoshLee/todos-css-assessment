@@ -152,6 +152,7 @@ $(function() {
       Todo.created = 0,
       current_date = "Title";
 
+  // Todo object
   function Todo(params) {
       Todo.created++;
       this.name = params.name;
@@ -163,9 +164,11 @@ $(function() {
       saveLocalStorage();
   }
 
+  // Renders current_todo template depending on date that is passed in
   function loadTodosByDate(date) {
-    var todosByDate = findManyWhere("date", date, todos);
-    $("#current_todos").html(templates.current_todos({todos: sortedArray(todosByDate), list_name: date, todos_length: incompleteItems(todosByDate).length}));
+    var todosByDate = sortedArray(findManyWhere("date", date, todos));
+    console.log(todosByDate)
+    $("#current_todos").html(templates.current_todos({todos: todosByDate, list_name: date, todos_length: incompleteItems(todosByDate).length}));
   }
 
   function incompleteItems(array) {
@@ -272,7 +275,7 @@ $(function() {
     var incomplete = [],
         complete = [];
     for(var i = 0; i < array.length; i++) {
-      if (todos[i].checked) {
+      if (array[i].checked) {
         complete.push(array[i]);
       } else {
         incomplete.push(array[i]);

@@ -367,6 +367,11 @@ modal
   color: rgba(20, 20, 20, 0.5);
 }
 
+#dates_circle {
+  position: relative;
+  bottom: 20px;
+}
+
 /*****************
   media queries
 ******************/

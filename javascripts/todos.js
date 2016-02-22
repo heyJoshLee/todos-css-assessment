@@ -4,7 +4,7 @@ $(function() {
 // Events
 /////////////
 
-// hightlight date
+// hightlight date and render todos
   $("#dates").on("click", "li", function(e) {
     e.preventDefault();
     var $this = $(this),
@@ -36,7 +36,7 @@ $(function() {
   });
 
   // Close modal
-  $(document).on("click", "#close_button, #modal_bg", function(e) {
+  $("main").on("click", "#close_button, #modal_bg", function(e) {
     e.preventDefault();
     fadeOutModal();
   });
@@ -77,17 +77,24 @@ $(function() {
     saveLocalStorage();
     fadeOutModal();
     renderDates();
-    render();
+    if(current_date != "All Todos") {
+      loadTodosByDate(current_date);
+    } else {
+      render();
+    }
   });
 
   // Add new Todo
   $("#current_todos").on("click", "#add_button", function(e) {
     e.preventDefault();
     var input = $("#new_todo_input").val();
+    if (input.length < 1) {
+      alert("Input cannot be empty!");
+      return;
+    }
     new Todo({name: input});
 
     $("#menu").find(".active").removeClass("active");
-    $("h1#all_todos_button").addClass("active");
 
     $(this).addClass("active");
     renderDates();
@@ -129,7 +136,11 @@ $(function() {
         item.checked = !item.checked;
         saveLocalStorage();
         renderDates();
-        render();
+        if (current_date != "All Todos") {
+          loadTodosByDate(current_date);
+        } else {
+          render();
+        }
   });
 
   // Find object in collection
@@ -150,7 +161,7 @@ $(function() {
       current_todo,
       dates = [];
       Todo.created = 0,
-      current_date = "Title";
+      current_date = "All Todos";
 
   // Todo object
   function Todo(params) {
@@ -167,7 +178,6 @@ $(function() {
   // Renders current_todo template depending on date that is passed in
   function loadTodosByDate(date) {
     var todosByDate = sortedArray(findManyWhere("date", date, todos));
-    console.log(todosByDate)
     $("#current_todos").html(templates.current_todos({todos: todosByDate, list_name: date, todos_length: incompleteItems(todosByDate).length}));
   }
 
@@ -249,8 +259,6 @@ $(function() {
     $("#dates").html(templates.dates({dates: dates, incomplete_items: incompleteItems(todos).length }));
   }
 
-
-
   // Fill in Modal
   function showModal(current_todo) {
     $("#modal_container").html(templates.modal(current_todo));
@@ -283,7 +291,6 @@ $(function() {
     }
     return incomplete.concat(complete);
   }
-
 
 
 

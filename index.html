@@ -36,6 +36,7 @@
 
     </main>
 
+    <!--- templates --------------------------------------------->
     <script type="x-handlebars-template" id="modal">
       <div id="modal" data-id="{{id}}">
         <h1>{{name}}</h1>
@@ -57,13 +58,9 @@
       <div id="modal_bg"></div>
     </script>
 
-
-
     <script type="x-handlebars-template" id="current_todos">
     <a id="#menu_icon"></a>
-
-      <h2 id="todo-title">{{list_name}}</h2><div class="circle">{{todos_length}}</div><br />
-
+      <h2 id="todo-title">{{list_name}}</h2><span class="circle">{{todos_length}}</span><br />
       <a id="add_button" href="#"></a><input id="new_todo_input" type="text" placeholer="Add new todo">
 
       <ul>
@@ -95,14 +92,13 @@
     </script>
 
     <script type="x-handlebars-template" id="dates">
-    <a><h1 id="all_todos_button">All Todos</h1></a><span class="circle">{{incomplete_items}}</span>
+    <a><h1 id="all_todos_button">All Todos</h1></a><span id="dates_circle" class="circle">{{incomplete_items}}</span>
       {{#each dates}}
         {{> date}}
       {{/each}}
     </script>
 
-    <!--- templates -->
-    <script type="x-handlebars-template" id="date">
+    <script type="x-handlebars-partical" id="date">
       <li><a href="#>">{{this}}</a></li>
     </script>
 

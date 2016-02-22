@@ -105,12 +105,13 @@ $(function() {
     e.preventDefault();
     var id = $(this).attr("data-id"),
         item_to_delete = findWhere("id", id, todos),
-        spot = todos.indexOf(item_to_delete);
+        spot = todos.indexOf(item_to_delete),
+        date_to_check = item_to_delete.date;
     if (spot === -1) {
       alert("can't find");
       return;
     }
-    checkToDeleteDate();
+    checkToDeleteDate(date_to_check);
 
     todos.splice(todos.indexOf(item_to_delete), 1);
     saveLocalStorage();
@@ -228,6 +229,17 @@ $(function() {
     localStorage.setItem("Todo_created", Todo.created);
   }
 
+
+  function checkToDeleteDate(d) {
+    if (dates.indexOf(d) === -1) {
+      return false;
+    } else {
+      if (findManyWhere("date", d, todos).length === 1) {
+        console.log("section to splice: " + dates.indexOf(d));
+        dates.splice(dates.indexOf(d), 1);
+      }
+    }
+  }
 
 
   function renderDates() {

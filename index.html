@@ -40,20 +40,19 @@
       <div id="modal" data-id="{{id}}">
         <h1>{{name}}</h1>
           {{# if date}}
-          <a class="add_date">{{date}}</a>
+          <a class="add_date">{{date}}</a><span class="hint">&#8592; Double click to edit<span>
           {{else}}
-          <a class="add_date">Add date</a>
+          <a class="add_date">Add date</a><span class="hint">&#8592; Double click to edit<span>
           {{/if}}
           </br>
-        <a class="save">
-        Save
-        </a>
-        <a href="#" id="close_button">X</a></br>
+                <a class="save">Save</a>
         {{# if checked}}
-          <a href="#" class="complete mark_as_complete">Marked as checked</a>
+          <a href="#" class="complete mark_as_complete complete-button">Mark as incomplete</a>
           {{else}}
         <a href="#" class="mark_as_complete">Mark as complete</a>
         {{/ if}}
+        <a href="#" id="close_button">X</a></br>
+
       </div>
       <div id="modal_bg"></div>
     </script>

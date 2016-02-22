@@ -147,10 +147,6 @@ a {
 }
 
 
-#menu > h1 + .circle {
-  top: -20px;
-}
-
 .circle {
   height: 18px;
   margin-right: 30px;
@@ -321,6 +317,54 @@ modal
 
 #close_button:hover {
   cursor: pointer;
+}
+
+.add_date {
+  display: inline-block;
+  font-size: 24px;
+  margin-bottom: 50px;
+}
+
+.save:hover {
+  cursor: pointer;
+}
+
+#modal > ul li {
+  list-style: none;
+}
+.save {
+  float: left;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  color: white;
+  background-color: rgba(27, 153, 33, 0.9);
+}
+
+.mark_as_complete {
+  float: left;
+  margin-left: 50px;
+  padding: 10px 20px;
+  color: white;
+  background-color: rgba(24, 62, 165, 0.9);
+}
+
+.mark_as_complete:after {
+  content: "";
+  display: block;
+  clear:both;
+}
+
+.complete-button {
+  background-color: rgba(219, 167, 24, 1);
+}
+
+.hint {
+  margin-left: 20px;
+  text-transform: lowercase;
+  padding-bottom: 30px;
+  color: rgba(20, 20, 20, 0.5);
 }
 
 /*****************

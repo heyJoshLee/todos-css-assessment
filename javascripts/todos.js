@@ -12,7 +12,6 @@ $(function() {
     $this.closest("ul").find(".active").removeClass("active");
     $(this).addClass("active");
     current_date = date;
-    console.log("current date is : " + current_date);
     loadTodosByDate(date);
   });
 
@@ -58,7 +57,6 @@ $(function() {
         old_date = item.date;
 
     item.date = new_value;
-    console.log("old date:" + old_date)
 
     $("#modal_container").html(templates.modal(current_todo));
     createNewDate(item);
@@ -167,7 +165,6 @@ $(function() {
 
   function loadTodosByDate(date) {
     var todosByDate = findManyWhere("date", date, todos);
-    console.log(incompleteItems(todosByDate));
     $("#current_todos").html(templates.current_todos({todos: sortedArray(todosByDate), list_name: date, todos_length: incompleteItems(todosByDate).length}));
   }
 
@@ -236,14 +233,10 @@ $(function() {
   // Checks to see if dates don't have todo items, if so then the date is deleted
   function checkToDeleteDate(d) {
     if (dates.indexOf(d) === -1) {
-      console.log("Can't find " + d + "in dates!");
       return false;
     } else {
       if (findManyWhere("date", d, todos).length <= 1) {
-        console.log("section to splice: " + dates.indexOf(d));
         dates.splice(dates.indexOf(d), 1);
-      } else {
-        console.log("length " + findManyWhere("date", d, todos).length);
       }
     }
   }
@@ -252,6 +245,7 @@ $(function() {
   function renderDates() {
     $("#dates").html(templates.dates({dates: dates, incomplete_items: incompleteItems(todos).length }));
   }
+
 
 
   // Fill in Modal
@@ -305,14 +299,6 @@ $(function() {
     }
   }
   init();
-
-
-
-
-
-
-
-
 
 
 });
